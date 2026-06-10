@@ -119,11 +119,10 @@ def get_gemini_stream(prompt_text, active_persona, uploaded_file):
         current_parts.append({"text": prompt_text})
         formatted_history.append({"role": "user", "parts": current_parts})
 
-        response_stream = client.models.generate_content(
+        response_stream = client.models.generate_content_stream(
             model="gemini-3.1-flash-lite",
             contents=formatted_history,
             config=types.GenerateContentConfig(system_instruction=system_prompt),
-            stream=True,
         )
 
         for chunk in response_stream:
